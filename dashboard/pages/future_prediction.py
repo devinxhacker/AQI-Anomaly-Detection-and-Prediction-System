@@ -30,7 +30,7 @@ DEFAULT_CITIES = ['Delhi', 'Mumbai', 'Bengaluru', 'Chennai', 'Kolkata', 'Hyderab
 def render_future_prediction_page():
     """Render future AQI prediction page"""
     
-    st.markdown("## 🔮 Future AQI Prediction")
+    st.markdown("## Future AQI Prediction")
     st.markdown("Predict air quality for upcoming dates using ML models")
     
     # Load predictor
@@ -45,7 +45,7 @@ def render_future_prediction_page():
     predictor = load_predictor()
     
     if predictor is None:
-        st.error("❌ Prediction models not loaded. Please train models first.")
+        st.error("Prediction models not loaded. Please train models first.")
         return
     
     # Input Section
@@ -70,9 +70,9 @@ def render_future_prediction_page():
         forecast_days = st.slider("Forecast Days", 1, 30, 7)
     
     # Auto-fetch current conditions
-    st.markdown("### 📊 Current Air Quality Conditions")
+    st.markdown("### Current Air Quality Conditions")
     
-    auto_fetch = st.checkbox("🔄 Auto-fetch current conditions from API", value=True)
+    auto_fetch = st.checkbox("Auto-fetch current conditions from API", value=True)
     
     current_data = None
     if auto_fetch and weather_api:
@@ -80,7 +80,7 @@ def render_future_prediction_page():
             current_data = weather_api.get_live_aqi_data(selected_city, 'IN')
         
         if current_data:
-            st.success(f"✅ Fetched current AQI: {current_data['actual_aqi']:.1f}")
+            st.success(f"Fetched current AQI: {current_data['actual_aqi']:.1f}")
             # Use fetched values as defaults
             pm25_default = current_data.get('PM2.5', 50)
             pm10_default = current_data.get('PM10', 75)
@@ -89,7 +89,7 @@ def render_future_prediction_page():
             so2_default = current_data.get('SO2', 20)
             o3_default = current_data.get('O3', 50)
         else:
-            st.info("ℹ️ Using default values. Enter manually if needed.")
+            st.info("Using default values. Enter manually if needed.")
             pm25_default = 50.0
             pm10_default = 75.0
             no2_default = 40.0
@@ -97,7 +97,7 @@ def render_future_prediction_page():
             so2_default = 20.0
             o3_default = 50.0
     else:
-        st.info("ℹ️ Manual input mode. Enter current pollutant values.")
+        st.info("Manual input mode. Enter current pollutant values.")
         pm25_default = 50.0
         pm10_default = 75.0
         no2_default = 40.0
@@ -124,7 +124,7 @@ def render_future_prediction_page():
         o3 = st.number_input("O3 (μg/m³)", 0.0, 300.0, float(o3_default), 1.0)
     
     # Predict button
-    if st.button("🔮 Generate Forecast", type="primary", use_container_width=True):
+    if st.button("Generate Forecast", type="primary", use_container_width=True):
         with st.spinner("Generating forecast..."):
             try:
                 # Generate predictions for future dates
@@ -196,10 +196,10 @@ def render_future_prediction_page():
                 forecast_df = pd.DataFrame(forecast_data)
                 
                 # Display results
-                st.success(f"✅ Generated {forecast_days}-day forecast for {selected_city}")
+                st.success(f"Generated {forecast_days}-day forecast for {selected_city}")
                 
                 # Forecast chart
-                st.markdown("### 📈 AQI Forecast")
+                st.markdown("### AQI Forecast")
                 
                 fig = go.Figure()
                 
@@ -231,7 +231,7 @@ def render_future_prediction_page():
                 st.plotly_chart(fig, use_container_width=True)
                 
                 # Forecast table
-                st.markdown("### 📋 Detailed Forecast")
+                st.markdown("### Detailed Forecast")
                 
                 # Color code by category
                 def get_category_color(category):
@@ -268,14 +268,14 @@ def render_future_prediction_page():
                 # Download option
                 csv = forecast_df.to_csv(index=False)
                 st.download_button(
-                    label="📥 Download Forecast (CSV)",
+                    label="Download Forecast (CSV)",
                     data=csv,
                     file_name=f"aqi_forecast_{selected_city}_{datetime.now().strftime('%Y%m%d')}.csv",
                     mime="text/csv"
                 )
                 
             except Exception as e:
-                st.error(f"❌ Prediction error: {str(e)}")
+                st.error(f"Prediction error: {str(e)}")
                 st.exception(e)
 
 

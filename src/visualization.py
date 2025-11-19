@@ -566,18 +566,18 @@ if __name__ == "__main__":
     
     # Test anomaly visualizer
     viz = AnomalyVisualizer()
-    print("\n✅ Anomaly Visualizer initialized")
+    print("\n[PASS] Anomaly Visualizer initialized")
     
     # Test model comparison
     model_viz = ModelComparisonVisualizer()
-    print("✅ Model Comparison Visualizer initialized")
+    print("[PASS] Model Comparison Visualizer initialized")
     
     # Test explainability
     explain_viz = ExplainabilityVisualizer()
-    print("✅ Explainability Visualizer initialized")
+    print("[PASS] Explainability Visualizer initialized")
     
     # Test EDA
     eda_viz = DataExplorationVisualizer()
-    print("✅ Data Exploration Visualizer initialized")
+    print("[PASS] Data Exploration Visualizer initialized")
     
-    print("\n✅ All visualization functions working correctly!")
+    print("\n[PASS] All visualization functions working correctly!")

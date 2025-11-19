@@ -28,7 +28,7 @@ from feature_engineering import prepare_single_prediction_features
 def render_aqi_prediction_page():
     """Render the AQI Prediction dashboard page"""
     
-    st.markdown("## 🌤️ Live Weather-Based AQI Prediction")
+    st.markdown("## Live Weather-Based AQI Prediction")
     st.markdown("Get real-time AQI predictions using live weather data and multiple ML models")
     
     # Initialize session state
@@ -44,7 +44,7 @@ def render_aqi_prediction_page():
         models_path = Path(__file__).resolve().parent.parent.parent / 'models'
         predictor = AQIPredictorSystem(models_dir=str(models_path))
         if not predictor.load_models():
-            st.warning("⚠️ Models not found. Please train models first by running: python src/aqi_predictor.py")
+            st.warning("Models not found. Please train models first by running: python src/aqi_predictor.py")
             return None
         return predictor
     
@@ -66,7 +66,7 @@ def render_aqi_prediction_page():
     weather_api = WeatherAPI(api_key=api_key)
     
     # API Key Configuration
-    with st.expander("🔑 OpenWeatherMap API Configuration", expanded=not api_key):
+    with st.expander("OpenWeatherMap API Configuration", expanded=not api_key):
         st.markdown("""
         To use live weather data, you need a free API key from OpenWeatherMap:
         
@@ -79,7 +79,7 @@ def render_aqi_prediction_page():
         temp_api_key = st.text_input("Enter API Key (temporary):", type="password")
         if temp_api_key:
             weather_api.api_key = temp_api_key
-            st.success("✅ API key configured!")
+            st.success("API key configured!")
     
     # Main content
     col1, col2 = st.columns([2, 1])
@@ -93,7 +93,7 @@ def render_aqi_prediction_page():
     
     with col2:
         country_code = st.text_input(
-            "🌐 Country Code:",
+            "Country Code:",
             value="IN",
             help="2-letter country code"
         )
@@ -102,25 +102,25 @@ def render_aqi_prediction_page():
     col1, col2, col3 = st.columns([1, 1, 2])
     
     with col1:
-        fetch_button = st.button("🔄 Fetch Live Data", type="primary", use_container_width=True)
+        fetch_button = st.button("Fetch Live Data", type="primary", use_container_width=True)
     
     with col2:
         if st.session_state.live_data:
-            if st.button("🧹 Clear Data", use_container_width=True):
+            if st.button("Clear Data", use_container_width=True):
                 st.session_state.live_data = None
                 st.session_state.predictions = None
                 st.rerun()
     
     # Fetch live data
     if fetch_button and city_input:
-        with st.spinner(f"🌐 Fetching live data for {city_input}..."):
+        with st.spinner(f"Fetching live data for {city_input}..."):
             live_data = weather_api.get_live_aqi_data(city_input, country_code)
         
         if live_data:
             st.session_state.live_data = live_data
-            st.success(f"✅ Successfully fetched data for {city_input}!")
+            st.success(f"Successfully fetched data for {city_input}!")
         else:
-            st.error("❌ Failed to fetch data. Please check city name and API key.")
+            st.error("Failed to fetch data. Please check city name and API key.")
     
     # Display data if available
     if st.session_state.live_data and predictor:
@@ -135,13 +135,13 @@ def render_aqi_prediction_page():
         
         with col1:
             st.metric(
-                "📍 City",
+                "City",
                 live_data['city']
             )
         
         with col2:
             st.metric(
-                "🌡️ Current AQI",
+                "Current AQI",
                 f"{live_data['actual_aqi']:.1f}",
                 delta=category
             )
@@ -157,14 +157,14 @@ def render_aqi_prediction_page():
         with col4:
             timestamp = datetime.fromtimestamp(live_data['timestamp'])
             st.metric(
-                "🕒 Last Updated",
+                "Last Updated",
                 timestamp.strftime('%H:%M')
             )
         
         st.markdown("---")
         
         # Display pollutant levels
-        st.markdown("### 📊 Current Pollutant Levels")
+        st.markdown("### Current Pollutant Levels")
         
         pollutants_data = {
             'Pollutant': ['PM2.5', 'PM10', 'NO2', 'CO', 'SO2', 'O3', 'NO', 'NH3', 'NOx'],
@@ -198,7 +198,7 @@ def render_aqi_prediction_page():
         st.markdown("---")
         
         # ML Prediction Section
-        st.markdown("### 🤖 ML Model Predictions")
+        st.markdown("### ML Model Predictions")
         
         # Prepare features for prediction
         # Need to add lag features and city encoding
@@ -240,7 +240,7 @@ def render_aqi_prediction_page():
             help="Choose the closest city from our training dataset"
         )
         
-        if st.button("🎯 Predict AQI", type="primary", use_container_width=True):
+        if st.button("Predict AQI", type="primary", use_container_width=True):
             with st.spinner("Running predictions with all models..."):
                 # Prepare pollutants dictionary with AQI estimate
                 pollutants = {
@@ -286,7 +286,7 @@ def render_aqi_prediction_page():
             prediction = st.session_state.predictions
             
             st.markdown("---")
-            st.markdown("### 📈 Prediction Results")
+            st.markdown("### Prediction Results")
             
             col1, col2, col3 = st.columns(3)
             
@@ -350,22 +350,22 @@ def render_aqi_prediction_page():
             
             # Health Advisory
             st.markdown("---")
-            st.markdown("### 💊 Health Advisory")
+            st.markdown("### Health Advisory")
             
             health_advisories = {
-                'Good': "Air quality is satisfactory, and air pollution poses little or no risk. ✅",
-                'Satisfactory': "Air quality is acceptable. Sensitive individuals should consider limiting prolonged outdoor exertion. ⚠️",
-                'Moderate': "Members of sensitive groups may experience health effects. The general public is less likely to be affected. ⚠️",
-                'Poor': "Everyone may begin to experience health effects; members of sensitive groups may experience more serious effects. 🚨",
-                'Very Poor': "Health alert: The risk of health effects is increased for everyone. Avoid outdoor exposure. 🚨",
-                'Severe': "Health warning: Everyone is more likely to be affected by serious health effects. Stay indoors! 🚨🚨"
+                'Good': "Air quality is satisfactory, and air pollution poses little or no risk.",
+                'Satisfactory': "Air quality is acceptable. Sensitive individuals should consider limiting prolonged outdoor exertion.",
+                'Moderate': "Members of sensitive groups may experience health effects. The general public is less likely to be affected.",
+                'Poor': "Everyone may begin to experience health effects; members of sensitive groups may experience more serious effects.",
+                'Very Poor': "Health alert: The risk of health effects is increased for everyone. Avoid outdoor exposure.",
+                'Severe': "Health warning: Everyone is more likely to be affected by serious health effects. Stay indoors!"
             }
             
             st.info(f"**{pred_category}:** {health_advisories.get(pred_category, 'No advisory available')}")
             
             # Model confidence gauge
             st.markdown("---")
-            st.markdown("### 📊 Model Confidence")
+            st.markdown("### Model Confidence")
             
             fig = go.Figure(go.Indicator(
                 mode = "gauge+number+delta",
@@ -389,16 +389,16 @@ def render_aqi_prediction_page():
     
     elif not city_input and not st.session_state.live_data:
         # Show instructions
-        st.info("👆 Enter a city name above and click 'Fetch Live Data' to get started!")
+        st.info("Enter a city name above and click 'Fetch Live Data' to get started!")
         
         st.markdown("---")
-        st.markdown("### 🌟 Features")
+        st.markdown("### Features")
         
         col1, col2, col3 = st.columns(3)
         
         with col1:
             st.markdown("""
-            **🌐 Live Weather Data**
+            **Live Weather Data**
             - Real-time air quality from OpenWeatherMap
             - Worldwide city support
             - Accurate pollutant measurements
@@ -406,7 +406,7 @@ def render_aqi_prediction_page():
         
         with col2:
             st.markdown("""
-            **🤖 Multiple ML Models**
+            **Multiple ML Models**
             - Random Forest, Gradient Boosting
             - KNN, Decision Tree
             - Linear Regression, AdaBoost
@@ -415,7 +415,7 @@ def render_aqi_prediction_page():
         
         with col3:
             st.markdown("""
-            **📊 Advanced Analytics**
+            **Advanced Analytics**
             - Real-time AQI calculation
             - Accuracy metrics
             - Health advisories

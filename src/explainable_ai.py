@@ -28,7 +28,7 @@ try:
     SHAP_AVAILABLE = True
 except ImportError:
     SHAP_AVAILABLE = False
-    print("⚠️  SHAP not available. Install with: pip install shap")
+    print("[WARNING] SHAP not available. Install with: pip install shap")
 
 try:
     import lime
@@ -36,7 +36,7 @@ try:
     LIME_AVAILABLE = True
 except ImportError:
     LIME_AVAILABLE = False
-    print("⚠️  LIME not available. Install with: pip install lime")
+    print("[WARNING] LIME not available. Install with: pip install lime")
 
 warnings.filterwarnings('ignore')
 
@@ -76,7 +76,7 @@ class SHAPExplainer:
     
     def create_explainer(self):
         """Create SHAP explainer"""
-        print("\n🧠 Creating SHAP Explainer...")
+        print("\nCreating SHAP Explainer...")
         
         # Use KernelExplainer for model-agnostic explanations
         # This works with any black-box model
@@ -102,7 +102,7 @@ class SHAPExplainer:
             link="identity"
         )
         
-        print("✅ SHAP Explainer created successfully!")
+        print("[SUCCESS] SHAP Explainer created successfully!")
     
     def explain_anomalies(self, X_anomalies, max_samples=50):
         """
@@ -112,7 +112,7 @@ class SHAPExplainer:
             X_anomalies: Anomalous instances to explain
             max_samples: Maximum number of samples to explain (for performance)
         """
-        print(f"\n🔍 Generating SHAP explanations for {len(X_anomalies)} anomalies...")
+        print(f"\nGenerating SHAP explanations for {len(X_anomalies)} anomalies...")
         
         # Limit samples for performance
         if len(X_anomalies) > max_samples:
@@ -126,17 +126,17 @@ class SHAPExplainer:
         print("   Computing SHAP values (this may take a few minutes)...")
         self.shap_values = self.explainer.shap_values(X_sample)
         
-        print(f"✅ SHAP values computed for {len(X_sample)} instances")
+        print(f"[SUCCESS] SHAP values computed for {len(X_sample)} instances")
         
         return self.shap_values
     
     def plot_summary(self, save_path=None):
         """Create SHAP summary plot"""
         if self.shap_values is None:
-            print("⚠️  No SHAP values available. Run explain_anomalies() first.")
+            print("[WARNING] No SHAP values available. Run explain_anomalies() first.")
             return
         
-        print("\n📊 Creating SHAP summary plot...")
+        print("\nCreating SHAP summary plot...")
         
         plt.figure(figsize=(12, 8))
         shap.summary_plot(
@@ -151,14 +151,14 @@ class SHAPExplainer:
         
         if save_path:
             plt.savefig(save_path, dpi=300, bbox_inches='tight')
-            print(f"✅ Summary plot saved to {save_path}")
+            print(f"[SUCCESS] Summary plot saved to {save_path}")
         
         plt.close()
     
     def plot_waterfall(self, instance_idx=0, save_path=None):
         """Create SHAP waterfall plot for a single instance"""
         if self.shap_values is None:
-            print("⚠️  No SHAP values available. Run explain_anomalies() first.")
+            print("[WARNING] No SHAP values available. Run explain_anomalies() first.")
             return
         
         print(f"\n💧 Creating SHAP waterfall plot for instance {instance_idx}...")
@@ -178,14 +178,14 @@ class SHAPExplainer:
         
         if save_path:
             plt.savefig(save_path, dpi=300, bbox_inches='tight')
-            print(f"✅ Waterfall plot saved to {save_path}")
+            print(f"[SUCCESS] Waterfall plot saved to {save_path}")
         
         plt.close()
     
     def get_feature_importance(self):
         """Get feature importance ranking from SHAP values"""
         if self.shap_values is None:
-            print("⚠️  No SHAP values available. Run explain_anomalies() first.")
+            print("[WARNING] No SHAP values available. Run explain_anomalies() first.")
             return None
         
         # Calculate mean absolute SHAP values
@@ -222,7 +222,7 @@ class LIMEExplainer:
     
     def create_explainer(self):
         """Create LIME explainer"""
-        print("\n🔬 Creating LIME Explainer...")
+        print("\nCreating LIME Explainer...")
         
         # Prediction function for LIME
         def predict_fn(X):
@@ -253,7 +253,7 @@ class LIMEExplainer:
             discretize_continuous=True
         )
         
-        print("✅ LIME Explainer created successfully!")
+        print("[SUCCESS] LIME Explainer created successfully!")
     
     def explain_instance(self, instance, num_features=10):
         """
@@ -289,7 +289,7 @@ class LIMEExplainer:
     
     def visualize_explanation(self, explanation, save_path=None):
         """Visualize LIME explanation"""
-        print("\n📊 Creating LIME explanation visualization...")
+        print("\nCreating LIME explanation visualization...")
         
         fig = explanation.as_pyplot_figure()
         plt.title("LIME Feature Contributions", fontsize=14, fontweight='bold')
@@ -297,7 +297,7 @@ class LIMEExplainer:
         
         if save_path:
             plt.savefig(save_path, dpi=300, bbox_inches='tight')
-            print(f"✅ LIME visualization saved to {save_path}")
+            print(f"[SUCCESS] LIME visualization saved to {save_path}")
         
         plt.close()
 
@@ -318,7 +318,7 @@ class ExplainableAnomalyDetection:
     def load_data_and_models(self):
         """Load preprocessed data and trained models"""
         print("=" * 80)
-        print("📊 LOADING DATA AND MODELS")
+        print("LOADING DATA AND MODELS")
         print("=" * 80)
         
         try:
@@ -336,7 +336,7 @@ class ExplainableAnomalyDetection:
                 X, test_size=0.2, random_state=42
             )
             
-            print(f"✅ Data loaded: {self.X_train.shape[0]} train, {self.X_test.shape[0]} test")
+            print(f"[SUCCESS] Data loaded: {self.X_train.shape[0]} train, {self.X_test.shape[0]} test")
             
             # Load models
             model_files = {
@@ -347,23 +347,23 @@ class ExplainableAnomalyDetection:
             for name, path in model_files.items():
                 if path.exists():
                     self.models[name] = joblib.load(path)
-                    print(f"✅ Loaded {name} model")
+                    print(f"[SUCCESS] Loaded {name} model")
             
             return True
             
         except Exception as e:
-            print(f"❌ Error loading data/models: {str(e)}")
+            print(f"[ERROR] Error loading data/models: {str(e)}")
             return False
     
     def detect_anomalies(self):
         """Detect anomalies using loaded models"""
         print("\n" + "=" * 80)
-        print("🔍 DETECTING ANOMALIES")
+        print("DETECTING ANOMALIES")
         print("=" * 80)
         
         # Use first available model for detection
         if not self.models:
-            print("❌ No models available")
+            print("[ERROR] No models available")
             return False
         
         model_name = list(self.models.keys())[0]
@@ -377,14 +377,14 @@ class ExplainableAnomalyDetection:
         # Find anomaly indices
         self.anomaly_indices = np.where(predictions == -1)[0]
         
-        print(f"✅ Detected {len(self.anomaly_indices)} anomalies ({len(self.anomaly_indices)/len(self.X_test)*100:.2f}%)")
+        print(f"[SUCCESS] Detected {len(self.anomaly_indices)} anomalies ({len(self.anomaly_indices)/len(self.X_test)*100:.2f}%)")
         
         return True
     
     def create_explainers(self):
         """Create SHAP and LIME explainers"""
         print("\n" + "=" * 80)
-        print("🧠 CREATING EXPLAINERS")
+        print("CREATING EXPLAINERS")
         print("=" * 80)
         
         for name, model in self.models.items():

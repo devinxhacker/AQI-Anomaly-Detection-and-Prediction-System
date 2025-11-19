@@ -39,7 +39,7 @@ DEFAULT_CITIES = [
 def render_data_management_page():
     """Render the Data Management dashboard page"""
     
-    st.markdown("## 📊 Data Management & Model Training")
+    st.markdown("## Data Management & Model Training")
     st.markdown("Fetch live historical data, store it, and train models - all in one place!")
     
     # Initialize session state
@@ -52,19 +52,19 @@ def render_data_management_page():
     
     # Create tabs
     tab1, tab2, tab3, tab4 = st.tabs([
-        "📥 Fetch Data", 
-        "💾 Dataset Info",
-        "🎯 Train Models", 
-        "📈 Training Status"
+        "Fetch Data", 
+        "Dataset Info",
+        "Train Models", 
+        "Training Status"
     ])
     
     # ========== TAB 1: FETCH DATA ==========
     with tab1:
-        st.markdown("### 🌐 Fetch Historical Air Quality Data")
-        st.info("💡 **Note**: Free API tier provides current data. Historical data is simulated with realistic variations.")
+        st.markdown("### Fetch Historical Air Quality Data")
+        st.info("**Note**: Free API tier provides current data. Historical data is simulated with realistic variations.")
         
         # API Key Configuration
-        with st.expander("🔑 API Configuration", expanded=False):
+        with st.expander("API Configuration", expanded=False):
             st.markdown("""
             Get your free API key from [OpenWeatherMap](https://openweathermap.org/api)
             - Free tier: 60 calls/minute, 1,000,000 calls/month
@@ -85,7 +85,7 @@ def render_data_management_page():
             api_key = temp_api_key or os.getenv('OPENWEATHER_API_KEY')
         
         if not api_key or api_key == 'your_api_key_here':
-            st.warning("⚠️ Please configure your OpenWeatherMap API key above")
+            st.warning("Please configure your OpenWeatherMap API key above")
             return
         
         # Date Range Selection
@@ -115,7 +115,7 @@ def render_data_management_page():
         
         if use_default_cities:
             selected_cities = DEFAULT_CITIES
-            st.success(f"✅ Selected {len(selected_cities)} Indian cities")
+            st.success(f"Selected {len(selected_cities)} Indian cities")
         else:
             city_input = st.text_area(
                 "Enter cities (one per line):",
@@ -133,7 +133,7 @@ def render_data_management_page():
         estimated_time = (len(selected_cities) * 1.1) / 60  # seconds to minutes
         
         st.markdown(f"""
-        **📊 Fetch Summary:**
+        **Fetch Summary:**
         - Cities: {len(selected_cities)}
         - Date Range: {days_count} days
         - Total Records: ~{total_records:,}
@@ -141,7 +141,7 @@ def render_data_management_page():
         """)
         
         # Fetch Button
-        if st.button("🚀 Fetch Data", type="primary", use_container_width=True):
+        if st.button("Fetch Data", type="primary", use_container_width=True):
             progress_bar = st.progress(0)
             status_text = st.empty()
             
@@ -164,16 +164,16 @@ def render_data_management_page():
                     st.session_state.data_saved = False
                     st.session_state.training_complete = False
                     
-                    st.success(f"✅ Successfully fetched {len(df):,} records!")
+                    st.success(f"Successfully fetched {len(df):,} records!")
                     st.balloons()
                     
             except Exception as e:
-                st.error(f"❌ Error fetching data: {str(e)}")
+                st.error(f"Error fetching data: {str(e)}")
                 st.exception(e)
     
     # ========== TAB 2: DATASET INFO ==========
     with tab2:
-        st.markdown("### 📋 Dataset Information")
+        st.markdown("### Dataset Information")
         
         if st.session_state.fetched_data is not None:
             df = st.session_state.fetched_data
@@ -234,11 +234,11 @@ def render_data_management_page():
             st.plotly_chart(fig, use_container_width=True)
             
             # Data Preview
-            with st.expander("📊 View Data Sample", expanded=False):
+            with st.expander("View Data Sample", expanded=False):
                 st.dataframe(df.head(100), use_container_width=True)
             
             # Save to CSV
-            st.markdown("#### 💾 Save Dataset")
+            st.markdown("#### Save Dataset")
             col1, col2 = st.columns([2, 1])
             
             with col1:
@@ -250,7 +250,7 @@ def render_data_management_page():
             with col2:
                 st.write("")
                 st.write("")
-                if st.button("💾 Save Dataset", type="primary"):
+                if st.button("Save Dataset", type="primary"):
                     try:
                         # Ensure directory exists
                         Path(save_path).parent.mkdir(parents=True, exist_ok=True)
@@ -258,21 +258,21 @@ def render_data_management_page():
                         # Save
                         df.to_csv(save_path, index=False)
                         st.session_state.data_saved = True
-                        st.success(f"✅ Data saved to {save_path}")
+                        st.success(f"Data saved to {save_path}")
                     except Exception as e:
-                        st.error(f"❌ Error saving data: {str(e)}")
+                        st.error(f"Error saving data: {str(e)}")
         
         else:
             st.info("👈 Fetch data first from the 'Fetch Data' tab")
     
     # ========== TAB 3: TRAIN MODELS ==========
     with tab3:
-        st.markdown("### 🎯 Train ML Models")
+        st.markdown("### Train ML Models")
         
         if not st.session_state.data_saved:
-            st.warning("⚠️ Please save the dataset first (Dataset Info tab)")
+            st.warning("Please save the dataset first (Dataset Info tab)")
         else:
-            st.success("✅ Dataset is ready for training")
+            st.success("Dataset is ready for training")
             
             st.markdown("""
             #### Training Pipeline:
@@ -287,7 +287,7 @@ def render_data_management_page():
             """)
             
             # Training options
-            with st.expander("⚙️ Training Options", expanded=False):
+            with st.expander("Training Options", expanded=False):
                 col1, col2 = st.columns(2)
                 with col1:
                     test_size = st.slider("Test Set Size", 0.1, 0.4, 0.2, 0.05)
@@ -295,11 +295,11 @@ def render_data_management_page():
                     cv_folds = st.slider("Cross-Validation Folds", 3, 10, 5)
             
             # Train Button
-            if st.button("🚀 Train All Models", type="primary", use_container_width=True):
+            if st.button("Train All Models", type="primary", use_container_width=True):
                 progress_container = st.container()
                 
                 with progress_container:
-                    st.markdown("### 🔄 Training in Progress...")
+                    st.markdown("### Training in Progress...")
                     
                     progress_bar = st.progress(0)
                     status_text = st.empty()
@@ -317,12 +317,12 @@ def render_data_management_page():
                         )
                         
                         if result.returncode != 0:
-                            st.error("❌ Data preprocessing failed")
+                            st.error("Data preprocessing failed")
                             st.code(result.stderr)
                             return
                         
                         progress_bar.progress(0.2)
-                        st.success("✅ Data preprocessing complete")
+                        st.success("Data preprocessing complete")
                         
                         # Step 2: Train Anomaly Detection
                         status_text.text("Step 2/5: Training Anomaly Detection Models...")
@@ -336,11 +336,11 @@ def render_data_management_page():
                         )
                         
                         if result.returncode != 0:
-                            st.warning("⚠️ Anomaly detection training had issues")
+                            st.warning("Anomaly detection training had issues")
                             with st.expander("View errors"):
                                 st.code(result.stderr)
                         else:
-                            st.success("✅ Anomaly detection models trained")
+                            st.success("Anomaly detection models trained")
                         
                         progress_bar.progress(0.5)
                         
@@ -356,12 +356,12 @@ def render_data_management_page():
                         )
                         
                         if result.returncode != 0:
-                            st.error("❌ Prediction model training failed")
+                            st.error("Prediction model training failed")
                             st.code(result.stderr)
                             return
                         
                         progress_bar.progress(0.8)
-                        st.success("✅ Prediction models trained (7 regression + 6 classification + 3 clustering)")
+                        st.success("Prediction models trained (7 regression + 6 classification + 3 clustering)")
                         
                         # Step 4: Generate XAI
                         status_text.text("Step 4/5: Generating Explainable AI insights...")
@@ -375,9 +375,9 @@ def render_data_management_page():
                         )
                         
                         if result.returncode != 0:
-                            st.warning("⚠️ XAI generation had issues (optional)")
+                            st.warning("XAI generation had issues (optional)")
                         else:
-                            st.success("✅ XAI insights generated")
+                            st.success("XAI insights generated")
                         
                         # Complete
                         progress_bar.progress(1.0)
@@ -385,12 +385,12 @@ def render_data_management_page():
                         
                         st.session_state.training_complete = True
                         
-                        st.success("🎉 All models trained successfully!")
+                        st.success("All models trained successfully!")
                         st.balloons()
                         
                         # Show summary
                         st.markdown("""
-                        ### ✅ Training Summary
+                        ### Training Summary
                         - **Anomaly Detection**: Isolation Forest, LOF, Autoencoder
                         - **Regression Models**: Random Forest, Gradient Boosting, AdaBoost, Decision Tree, Linear, Ridge, KNN
                         - **Classification Models**: Random Forest, Gradient Boosting, AdaBoost, Decision Tree, Logistic, KNN, Naive Bayes
@@ -404,14 +404,14 @@ def render_data_management_page():
                         """)
                         
                     except subprocess.TimeoutExpired:
-                        st.error("❌ Training timeout - Process took too long")
+                        st.error("Training timeout - Process took too long")
                     except Exception as e:
-                        st.error(f"❌ Training error: {str(e)}")
+                        st.error(f"Training error: {str(e)}")
                         st.exception(e)
     
     # ========== TAB 4: TRAINING STATUS ==========
     with tab4:
-        st.markdown("### 📈 Training Status & Model Files")
+        st.markdown("### Training Status & Model Files")
         
         # Check for model files
         models_dir = Path('models')
@@ -420,7 +420,7 @@ def render_data_management_page():
             model_files = list(models_dir.glob('*.joblib')) + list(models_dir.glob('*.pkl'))
             
             if model_files:
-                st.success(f"✅ Found {len(model_files)} model files")
+                st.success(f"Found {len(model_files)} model files")
                 
                 # Categorize models
                 regression_models = [f for f in model_files if 'regressor' in f.name and 'best' not in f.name]
@@ -455,26 +455,26 @@ def render_data_management_page():
                 
                 # Load and show performance
                 if (models_dir / 'regression_comparison.csv').exists():
-                    st.markdown("#### 📊 Regression Model Performance")
+                    st.markdown("#### Regression Model Performance")
                     reg_df = pd.read_csv(models_dir / 'regression_comparison.csv', index_col=0)
                     st.dataframe(reg_df.style.highlight_max(axis=0), use_container_width=True)
                 
                 if (models_dir / 'classification_comparison.csv').exists():
-                    st.markdown("#### 📊 Classification Model Performance")
+                    st.markdown("#### Classification Model Performance")
                     cls_df = pd.read_csv(models_dir / 'classification_comparison.csv', index_col=0)
                     st.dataframe(cls_df.style.highlight_max(axis=0), use_container_width=True)
             
             else:
-                st.warning("⚠️ No trained models found. Please train models first.")
+                st.warning("No trained models found. Please train models first.")
         
         else:
-            st.warning("⚠️ Models directory not found. Please train models first.")
+            st.warning("Models directory not found. Please train models first.")
         
         # Training status
         if st.session_state.training_complete:
-            st.success("✅ Training completed in this session!")
+            st.success("Training completed in this session!")
         else:
-            st.info("ℹ️ No training completed in this session yet")
+            st.info("No training completed in this session yet")
 
 
 # Render the page

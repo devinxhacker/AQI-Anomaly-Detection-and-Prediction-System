@@ -32,11 +32,11 @@ This project introduces a **novel anomaly detection framework** with explainable
 
 ### 1.3 Unique Contributions
 
-✅ **Multi-Algorithm Ensemble**: Combines 3 different anomaly detection approaches  
-✅ **Explainable AI Integration**: First AQI system with SHAP/LIME explanations  
-✅ **Severity-Based Alerting**: 4-level classification (Low/Medium/High/Critical)  
-✅ **Temporal Pattern Analysis**: Identifies seasonal and weekly anomaly trends  
-✅ **Interactive Dashboard**: Real-time exploration and drill-down capabilities  
+- **Multi-Algorithm Ensemble**: Combines 3 different anomaly detection approaches  
+- **Explainable AI Integration**: First AQI system with SHAP/LIME explanations  
+- **Severity-Based Alerting**: 4-level classification (Low/Medium/High/Critical)  
+- **Temporal Pattern Analysis**: Identifies seasonal and weekly anomaly trends  
+- **Interactive Dashboard**: Real-time exploration and drill-down capabilities  
 
 ---
 
@@ -300,8 +300,8 @@ LimeTabularExplainer:
 
 | Level | Criteria | Color | Action |
 |-------|----------|-------|--------|
-| 🟢 **Low** | Anomaly score > -0.1 | Green | Informational |
-| 🟡 **Medium** | -0.15 < score ≤ -0.1 | Yellow | Monitoring required |
+| **Low** | Anomaly score > -0.1 | Green | Informational |
+| **Medium** | -0.15 < score ≤ -0.1 | Yellow | Monitoring required |
 | 🟠 **High** | -0.2 < score ≤ -0.15 | Orange | Investigation needed |
 | 🔴 **Critical** | score ≤ -0.2 | Red | Immediate action |
 
