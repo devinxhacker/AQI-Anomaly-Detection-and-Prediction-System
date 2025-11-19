@@ -34,7 +34,7 @@ try:
     
     # Test PathManager
     pm = PathManager()
-    print(f"  ✅ PathManager initialized")
+    print(f"  [PASS] PathManager initialized")
     print(f"     - Project root: {pm.project_root}")
     print(f"     - Data dir: {pm.data_dir}")
     
@@ -46,31 +46,31 @@ try:
     })
     validator = DataValidator()
     missing_report = validator.check_missing_values(sample_data)
-    print(f"  ✅ DataValidator working - found {missing_report['total_missing']} missing values")
+    print(f"  [PASS] DataValidator working - found {missing_report['total_missing']} missing values")
     
     # Test MetricsCalculator
     calc = MetricsCalculator()
     y_true = np.array([0, 0, 1, 1, 0, 1])
     y_pred = np.array([0, 0, 1, 0, 0, 1])
     metrics = calc.calculate_anomaly_metrics(y_true, y_pred)
-    print(f"  ✅ MetricsCalculator working - Precision: {metrics['precision']:.3f}")
+    print(f"  [PASS] MetricsCalculator working - Precision: {metrics['precision']:.3f}")
     
     # Test ConfigManager
     config_mgr = ConfigManager()
     default_config = config_mgr.get_default_config()
-    print(f"  ✅ ConfigManager working - {len(default_config)} config sections")
+    print(f"  [PASS] ConfigManager working - {len(default_config)} config sections")
     
     # Test TimeSeriesUtils
     ts_utils = TimeSeriesUtils()
     dates = pd.date_range('2020-01-01', periods=10)
     time_df = pd.DataFrame({'date': dates})
     time_features = ts_utils.create_time_features(time_df, 'date')
-    print(f"  ✅ TimeSeriesUtils working - created {len(time_features.columns)} time features")
+    print(f"  [PASS] TimeSeriesUtils working - created {len(time_features.columns)} time features")
     
-    print("\n✅ utils.py module: ALL TESTS PASSED")
+    print("\n[PASS] utils.py module: ALL TESTS PASSED")
     
 except Exception as e:
-    print(f"\n❌ utils.py module: TEST FAILED - {e}")
+    print(f"\n[FAIL] utils.py module: TEST FAILED - {e}")
     import traceback
     traceback.print_exc()
 
@@ -86,7 +86,7 @@ try:
         context={'hour': 14, 'season': 'winter', 'pollutants': {'PM2.5': 250, 'CO': 15}}
     )
     emoji = classifier.get_severity_emoji(severity)
-    print(f"  ✅ SeverityClassifier working - classified as {severity} {emoji}")
+    print(f"  [PASS] SeverityClassifier working - classified as {severity} {emoji}")
     
     # Test Alert
     alert = Alert(
@@ -99,7 +99,7 @@ try:
         description='Test alert',
         recommendations=['Stay indoors']
     )
-    print(f"  ✅ Alert object created - ID: {alert.alert_id}, Status: {alert.status}")
+    print(f"  [PASS] Alert object created - ID: {alert.alert_id}, Status: {alert.status}")
     
     # Test AlertGenerator
     generator = AlertGenerator()
@@ -116,7 +116,7 @@ try:
     })
     
     test_alert = generator.generate_alert(sample_anomaly.iloc[0], 0)
-    print(f"  ✅ AlertGenerator working - generated alert with severity: {test_alert.severity}")
+    print(f"  [PASS] AlertGenerator working - generated alert with severity: {test_alert.severity}")
     
     # Test AlertManager
     manager = AlertManager()
@@ -135,7 +135,7 @@ try:
     anomaly_scores = sample_anomalies['anomaly_score'].values
     manager.generate_alerts_from_anomalies(sample_anomalies, anomaly_scores)
     summary = manager.get_alert_summary()
-    print(f"  ✅ AlertManager working - generated {summary['total_alerts']} alerts")
+    print(f"  [PASS] AlertManager working - generated {summary['total_alerts']} alerts")
     print(f"     - Critical: {summary['severity_distribution'].get('critical', 0)}")
     print(f"     - High: {summary['severity_distribution'].get('high', 0)}")
     print(f"     - Medium: {summary['severity_distribution'].get('medium', 0)}")
@@ -144,12 +144,12 @@ try:
     # Test alert filtering
     critical_alerts = manager.get_critical_alerts()
     delhi_alerts = manager.get_alerts_by_city('Delhi')
-    print(f"  ✅ Alert filtering working - {len(critical_alerts)} critical, {len(delhi_alerts)} in Delhi")
+    print(f"  [PASS] Alert filtering working - {len(critical_alerts)} critical, {len(delhi_alerts)} in Delhi")
     
-    print("\n✅ alert_system.py module: ALL TESTS PASSED")
+    print("\n[PASS] alert_system.py module: ALL TESTS PASSED")
     
 except Exception as e:
-    print(f"\n❌ alert_system.py module: TEST FAILED - {e}")
+    print(f"\n[FAIL] alert_system.py module: TEST FAILED - {e}")
     import traceback
     traceback.print_exc()
 
@@ -175,7 +175,7 @@ try:
     
     # Test AnomalyVisualizer
     anomaly_viz = AnomalyVisualizer()
-    print(f"  ✅ AnomalyVisualizer initialized")
+    print(f"  [PASS] AnomalyVisualizer initialized")
     
     # Test ModelComparisonVisualizer
     model_viz = ModelComparisonVisualizer()
@@ -184,21 +184,21 @@ try:
         'LOF': {'precision': 0.82, 'recall': 0.78, 'f1_score': 0.80},
         'Autoencoder': {'precision': 0.88, 'recall': 0.83, 'f1_score': 0.85}
     }
-    print(f"  ✅ ModelComparisonVisualizer initialized")
+    print(f"  [PASS] ModelComparisonVisualizer initialized")
     
     # Test ExplainabilityVisualizer
     explain_viz = ExplainabilityVisualizer()
     feature_importance = {'PM2.5': 0.35, 'PM10': 0.25, 'NO2': 0.20, 'CO': 0.15, 'O3': 0.05}
-    print(f"  ✅ ExplainabilityVisualizer initialized")
+    print(f"  [PASS] ExplainabilityVisualizer initialized")
     
     # Test DataExplorationVisualizer
     eda_viz = DataExplorationVisualizer()
-    print(f"  ✅ DataExplorationVisualizer initialized")
+    print(f"  [PASS] DataExplorationVisualizer initialized")
     
-    print("\n✅ visualization.py module: ALL TESTS PASSED")
+    print("\n[PASS] visualization.py module: ALL TESTS PASSED")
     
 except Exception as e:
-    print(f"\n❌ visualization.py module: TEST FAILED - {e}")
+    print(f"\n[FAIL] visualization.py module: TEST FAILED - {e}")
     import traceback
     traceback.print_exc()
 
@@ -231,15 +231,15 @@ try:
     # 5. Get alert summary
     alert_summary = manager.get_alert_summary()
     
-    print(f"  ✅ Complete workflow executed successfully")
+    print(f"  [PASS] Complete workflow executed successfully")
     print(f"     - Data validation: {validation_report['total_missing']} missing values")
     print(f"     - Alerts generated: {alert_summary['total_alerts']}")
     print(f"     - Model precision: {metrics['precision']:.3f}")
     
-    print("\n✅ INTEGRATION TEST: ALL TESTS PASSED")
+    print("\n[PASS] INTEGRATION TEST: ALL TESTS PASSED")
     
 except Exception as e:
-    print(f"\n❌ INTEGRATION TEST: TEST FAILED - {e}")
+    print(f"\n[FAIL] INTEGRATION TEST: TEST FAILED - {e}")
     import traceback
     traceback.print_exc()
 
@@ -247,12 +247,12 @@ except Exception as e:
 print("\n" + "="*80)
 print("INTEGRATION TEST SUMMARY")
 print("="*80)
-print("\n✅ ALL TESTS PASSED - System is ready for deployment!")
+print("\n[PASS] ALL TESTS PASSED - System is ready for deployment!")
 print("\nTested components:")
-print("  1. ✅ utils.py - Utility functions (6 classes)")
-print("  2. ✅ alert_system.py - Alert generation and management (4 classes)")
-print("  3. ✅ visualization.py - Visualization functions (4 classes)")
-print("  4. ✅ Module integration - Complete workflow")
+print("  1. [PASS] utils.py - Utility functions (6 classes)")
+print("  2. [PASS] alert_system.py - Alert generation and management (4 classes)")
+print("  3. [PASS] visualization.py - Visualization functions (4 classes)")
+print("  4. [PASS] Module integration - Complete workflow")
 print("\nNext steps:")
 print("  - Run the Streamlit dashboard: streamlit run dashboard/streamlit_app.py")
 print("  - Check the Jupyter notebook: notebooks/01_comprehensive_aqi_anomaly_detection.ipynb")

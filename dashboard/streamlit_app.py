@@ -41,7 +41,7 @@ warnings.filterwarnings('ignore')
 # Configure page
 st.set_page_config(
     page_title="AQI Anomaly Detection System",
-    page_icon="🚨",
+    page_icon="⚠",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -223,13 +223,13 @@ def get_severity_level(anomaly_score, percentile_90=None):
         percentile_90 = -0.1  # Default threshold
     
     if anomaly_score < percentile_90 * 2:
-        return "🔴 Critical"
+        return "Critical"
     elif anomaly_score < percentile_90 * 1.5:
-        return "🟠 High"
+        return "High"
     elif anomaly_score < percentile_90:
-        return "🟡 Medium"
+        return "Medium"
     else:
-        return "🟢 Low"
+        return "Low"
 
 
 def _season_from_month(month_value):
@@ -348,8 +348,8 @@ def display_anomaly_card(row, score, severity, idx):
     """Display anomaly information card"""
     
     severity_colors = {
-        "🔴 Critical": "alert-card-critical",
-        "🟠 High": "alert-card-high"
+        "Critical": "alert-card-critical",
+        "High": "alert-card-high"
     }
     
     card_class = severity_colors.get(severity, "metric-card")
@@ -373,12 +373,12 @@ def main():
     """Main dashboard application"""
     
     # Title
-    st.markdown('<h1 class="main-title">🚨 AQI Anomaly Detection & Prediction System</h1>', 
+    st.markdown('<h1 class="main-title">AQI Anomaly Detection & Prediction System</h1>', 
                 unsafe_allow_html=True)
     
     st.markdown("""
     <div class="info-box">
-        <strong>🎯 Purpose:</strong> This system detects unusual air quality patterns using advanced machine learning 
+        <strong>Purpose:</strong> This system detects unusual air quality patterns using advanced machine learning 
         and provides explainable insights into why certain readings are flagged as anomalous.
     </div>
     """, unsafe_allow_html=True)
@@ -386,16 +386,16 @@ def main():
     # Sidebar
     with st.sidebar:
         st.image("https://play-lh.googleusercontent.com/zYcmB8SKs2NMSMTBTBDqEqiF57MJNq__XW97SV3hoYfxBnPOizJwfhiE4KvwY4ziFI4", width=150)
-        st.title("🔧 Navigation")
+        st.title("Navigation")
         
         page = st.radio(
             "Select Page",
-            ["🏠 Dashboard", "📊 Data Management", "🔍 Anomaly Explorer", "🧠 Explainable AI", 
-             "⚠️ Alert Center", "📈 Model Performance", "🌤️ AQI Prediction", "🔮 Future Forecast"]
+            ["Dashboard", "Data Management", "Anomaly Explorer", "Explainable AI", 
+             "Alert Center", "Model Performance", "AQI Prediction", "Future Forecast"]
         )
         
         st.markdown("---")
-        st.markdown("### 📌 Quick Stats")
+        st.markdown("### Quick Stats")
         
         # Load summary
         summary = load_results_summary()
@@ -405,7 +405,7 @@ def main():
             st.metric("Contamination Rate", f"{summary.get('contamination', 0.1)*100:.1f}%")
         
         st.markdown("---")
-        st.markdown("### ℹ️ About")
+        st.markdown("### About")
         st.info("""
         **Anomaly Detection:**
         - Isolation Forest
@@ -423,21 +423,21 @@ def main():
         """)
     
     # Main content based on page selection
-    if page == "🏠 Dashboard":
+    if page == "Dashboard":
         show_dashboard_page()
-    elif page == "📊 Data Management":
+    elif page == "Data Management":
         show_data_management_page()
-    elif page == "🔍 Anomaly Explorer":
+    elif page == "Anomaly Explorer":
         show_anomaly_explorer_page()
-    elif page == "🧠 Explainable AI":
+    elif page == "Explainable AI":
         show_explainable_ai_page()
-    elif page == "⚠️ Alert Center":
+    elif page == "Alert Center":
         show_alert_center_page()
-    elif page == "📈 Model Performance":
+    elif page == "Model Performance":
         show_model_performance_page()
-    elif page == "🌤️ AQI Prediction":
+    elif page == "AQI Prediction":
         show_aqi_prediction_page()
-    elif page == "🔮 Future Forecast":
+    elif page == "Future Forecast":
         show_future_forecast_page()
 
 
@@ -447,7 +447,7 @@ def main():
 
 def show_dashboard_page():
     """Main dashboard overview"""
-    st.header("📊 System Overview")
+    st.header("System Overview")
     
     # Load data
     df = load_data()
@@ -455,7 +455,7 @@ def show_dashboard_page():
     summary = load_results_summary()
     
     if df is None:
-        st.error("⚠️ Data not found. Please run data_preprocessing.py first.")
+        st.error("Data not found. Please run data_preprocessing.py first.")
         return
     
     # Metrics row
@@ -464,7 +464,7 @@ def show_dashboard_page():
     with col1:
         st.markdown("""
         <div class="metric-card">
-            <h3>📊 Total Records</h3>
+            <h3>Total Records</h3>
             <h2>{:,}</h2>
             <p>Air quality measurements</p>
         </div>
@@ -473,7 +473,7 @@ def show_dashboard_page():
     with col2:
         st.markdown("""
         <div class="metric-card">
-            <h3>🏙️ Cities Monitored</h3>
+            <h3>Cities Monitored</h3>
             <h2>{}</h2>
             <p>Across India</p>
         </div>
@@ -484,7 +484,7 @@ def show_dashboard_page():
             total_anomalies = sum(d['num_anomalies'] for d in summary['detectors'].values())
             st.markdown("""
             <div class="anomaly-card">
-                <h3>🚨 Anomalies Detected</h3>
+                <h3>Anomalies Detected</h3>
                 <h2>{:,}</h2>
                 <p>Unusual patterns found</p>
             </div>
@@ -492,7 +492,7 @@ def show_dashboard_page():
         else:
             st.markdown("""
             <div class="anomaly-card">
-                <h3>🚨 Anomalies</h3>
+                <h3>Anomalies</h3>
                 <h2>N/A</h2>
                 <p>Run detection first</p>
             </div>
@@ -501,7 +501,7 @@ def show_dashboard_page():
     with col4:
         st.markdown("""
         <div class="metric-card">
-            <h3>🤖 Models Active</h3>
+            <h3>Models Active</h3>
             <h2>{}</h2>
             <p>Detection algorithms</p>
         </div>
@@ -513,7 +513,7 @@ def show_dashboard_page():
     col1, col2 = st.columns(2)
     
     with col1:
-        st.subheader("📈 AQI Distribution")
+        st.subheader("AQI Distribution")
         fig, ax = plt.subplots(figsize=(10, 6))
         df['AQI'].hist(bins=50, ax=ax, color='#3498db', edgecolor='black')
         ax.set_xlabel('AQI Value')
@@ -524,7 +524,7 @@ def show_dashboard_page():
         plt.close()
     
     with col2:
-        st.subheader("🌆 Top Cities by Records")
+        st.subheader("Top Cities by Records")
         city_counts = df['City'].value_counts().head(10)
         fig, ax = plt.subplots(figsize=(10, 6))
         city_counts.plot(kind='barh', ax=ax, color='#e74c3c')
@@ -536,7 +536,7 @@ def show_dashboard_page():
     
     # Recent data section
     st.markdown("---")
-    st.subheader("📋 Recent Data Sample")
+    st.subheader("Recent Data Sample")
     st.dataframe(df.tail(10), use_container_width=True)
 
 
@@ -546,7 +546,7 @@ def show_dashboard_page():
 
 def show_anomaly_explorer_page():
     """Explore detected anomalies"""
-    st.header("🔍 Anomaly Explorer")
+    st.header("Anomaly Explorer")
     
     st.markdown("""
     <div class="info-box">
@@ -560,7 +560,7 @@ def show_anomaly_explorer_page():
     models = load_models()
     
     if df is None or not models:
-        st.warning("⚠️ Please ensure data preprocessing and model training are complete.")
+        st.warning("Please ensure data preprocessing and model training are complete.")
         return
     
     # Model selection
@@ -569,7 +569,7 @@ def show_anomaly_explorer_page():
     st.markdown("---")
     
     # Detect anomalies
-    with st.spinner("🔍 Detecting anomalies..."):
+    with st.spinner("Detecting anomalies..."):
         try:
             df_prepared = df.copy()
             feature_matrix = prepare_anomaly_features(df_prepared)
@@ -588,10 +588,10 @@ def show_anomaly_explorer_page():
             anomaly_mask = (predictions == -1)
             anomaly_indices = np.where(anomaly_mask)[0]
             
-            st.success(f"✅ Detected {len(anomaly_indices)} anomalies ({len(anomaly_indices)/len(X)*100:.2f}%)")
+            st.success(f"Detected {len(anomaly_indices)} anomalies ({len(anomaly_indices)/len(X)*100:.2f}%)")
             
             # Filter options
-            st.subheader("🎛️ Filter Options")
+            st.subheader("Filter Options")
             col1, col2, col3 = st.columns(3)
             
             with col1:
@@ -599,7 +599,7 @@ def show_anomaly_explorer_page():
                 selected_city = st.selectbox("City", cities)
             
             with col2:
-                severity_options = ['All', '🔴 Critical', '🟠 High', '🟡 Medium', '🟢 Low']
+                severity_options = ['All', 'Critical', 'High', 'Medium', 'Low']
                 selected_severity = st.selectbox("Severity", severity_options)
             
             with col3:
@@ -630,7 +630,7 @@ def show_anomaly_explorer_page():
             anomaly_df = anomaly_df.sort_values('Anomaly_Score').head(num_display)
             
             st.markdown("---")
-            st.subheader(f"🚨 Top {len(anomaly_df)} Anomalies")
+            st.subheader(f"Top {len(anomaly_df)} Anomalies")
             
             # Display anomaly cards
             for idx, (_, row) in enumerate(anomaly_df.iterrows(), 1):
@@ -638,14 +638,14 @@ def show_anomaly_explorer_page():
                     col1, col2 = st.columns(2)
                     
                     with col1:
-                        st.markdown("**📊 Pollutant Levels:**")
+                        st.markdown("**Pollutant Levels:**")
                         pollutants = ['PM2.5', 'PM10', 'NO2', 'CO', 'SO2', 'O3']
                         for pollutant in pollutants:
                             if pollutant in row:
                                 st.write(f"- **{pollutant}:** {row[pollutant]:.2f}")
                     
                     with col2:
-                        st.markdown("**🎯 Anomaly Details:**")
+                        st.markdown("**Anomaly Details:**")
                         st.write(f"- **AQI:** {row['AQI']:.0f}")
                         st.write(f"- **Anomaly Score:** {row['Anomaly_Score']:.4f}")
                         st.write(f"- **Severity:** {row['Severity']}")
@@ -662,7 +662,7 @@ def show_anomaly_explorer_page():
 
 def show_explainable_ai_page():
     """Show explainability visualizations"""
-    st.header("🧠 Explainable AI Insights")
+    st.header("Explainable AI Insights")
     
     st.markdown("""
     <div class="info-box">
@@ -675,7 +675,7 @@ def show_explainable_ai_page():
     st.markdown("---")
     
     # Check for generated visualizations
-    st.subheader("📊 SHAP Feature Importance")
+    st.subheader("SHAP Feature Importance")
     
     shap_files = list(RESULTS_DIR.glob('shap_summary_*.png'))
     
@@ -685,12 +685,12 @@ def show_explainable_ai_page():
             st.markdown(f"### {model_name}")
             st.image(str(shap_file), use_container_width=True)
     else:
-        st.warning("⚠️ SHAP visualizations not found. Please run src/explainable_ai.py first.")
+        st.warning("SHAP visualizations not found. Please run src/explainable_ai.py first.")
     
     st.markdown("---")
     
     # Feature importance tables
-    st.subheader("📈 Feature Importance Rankings")
+    st.subheader("Feature Importance Rankings")
     
     importance_files = list(RESULTS_DIR.glob('feature_importance_*.csv'))
     
@@ -732,11 +732,11 @@ def show_explainable_ai_page():
 
 def show_alert_center_page():
     """Alert management system"""
-    st.header("⚠️ Alert Center")
+    st.header("Alert Center")
     
     st.markdown("""
     <div class="alert-card-critical">
-        <h3>🚨 Active Alerts</h3>
+        <h3>Active Alerts</h3>
         <p>Real-time monitoring of critical and high-severity anomalies</p>
     </div>
     """, unsafe_allow_html=True)
@@ -746,7 +746,7 @@ def show_alert_center_page():
     models = load_models()
     
     if df is None or not models:
-        st.warning("⚠️ System not initialized")
+        st.warning("System not initialized")
         return
     
     # Detect recent anomalies
@@ -785,7 +785,7 @@ def show_alert_center_page():
             critical_df = critical_df.sort_values('Anomaly_Score').head(20)
             
             # Display alerts
-            st.subheader(f"🔴 {len(critical_df)} Critical/High Alerts")
+            st.subheader(f"{len(critical_df)} Critical/High Alerts")
             
             for idx, (_, row) in enumerate(critical_df.iterrows(), 1):
                 severity_class = "alert-card-critical" if "Critical" in row['Severity'] else "alert-card-high"
@@ -793,10 +793,10 @@ def show_alert_center_page():
                 st.markdown(f"""
                 <div class="{severity_class}">
                     <h4>Alert #{idx} - {row['Severity']}</h4>
-                    <p><strong>📍 Location:</strong> {row['City']}</p>
-                    <p><strong>📅 Date:</strong> {row['Date']}</p>
-                    <p><strong>🌫️ AQI:</strong> {row['AQI']:.0f}</p>
-                    <p><strong>⚡ PM2.5:</strong> {row.get('PM2.5', 0):.1f} μg/m³</p>
+                    <p><strong>Location:</strong> {row['City']}</p>
+                    <p><strong>Date:</strong> {row['Date']}</p>
+                    <p><strong>AQI:</strong> {row['AQI']:.0f}</p>
+                    <p><strong>PM2.5:</strong> {row.get('PM2.5', 0):.1f} μg/m³</p>
                     <p><strong>Score:</strong> {row['Anomaly_Score']:.4f}</p>
                 </div>
                 """, unsafe_allow_html=True)
@@ -825,18 +825,18 @@ def show_alert_center_page():
 
 def show_model_performance_page():
     """Show model performance metrics"""
-    st.header("📊 Model Performance Analysis")
+    st.header("Model Performance Analysis")
     
     # Load summary
     summary = load_results_summary()
     
     if summary is None:
-        st.warning("⚠️ No performance data available. Please run anomaly_detectors.py first.")
+        st.warning("No performance data available. Please run anomaly_detectors.py first.")
         return
     
     st.markdown("""
     <div class="success-box">
-        <strong>✅ Models Trained Successfully</strong><br>
+        <strong>Models Trained Successfully</strong><br>
         Comprehensive anomaly detection pipeline with multiple algorithms.
     </div>
     """, unsafe_allow_html=True)
@@ -844,7 +844,7 @@ def show_model_performance_page():
     st.markdown("---")
     
     # Training information
-    st.subheader("🔧 Training Configuration")
+    st.subheader("Training Configuration")
     col1, col2, col3 = st.columns(3)
     
     with col1:
@@ -857,7 +857,7 @@ def show_model_performance_page():
     st.markdown("---")
     
     # Model comparison
-    st.subheader("🤖 Model Comparison")
+    st.subheader("Model Comparison")
     
     if 'detectors' in summary:
         comparison_data = []
@@ -899,7 +899,7 @@ def show_model_performance_page():
     
     # Comparison visualization
     st.markdown("---")
-    st.subheader("📊 Visual Comparison")
+    st.subheader("Visual Comparison")
     
     comparison_viz_path = RESULTS_DIR / 'anomaly_detection_comparison.png'
     if comparison_viz_path.exists():
@@ -909,7 +909,7 @@ def show_model_performance_page():
     
     # Prediction models performance
     st.markdown("---")
-    st.subheader("🎯 Prediction Models Performance")
+    st.subheader("Prediction Models Performance")
     
     # Load regression comparison
     reg_comp_path = MODELS_DIR / 'regression_comparison.csv'
@@ -983,7 +983,7 @@ def show_model_performance_page():
     
     # Clustering visualization
     st.markdown("---")
-    st.subheader("🔍 Anomaly Detection Visualization")
+    st.subheader("Anomaly Detection Visualization")
     
     # Load dataset for anomaly viz
     df = load_data()

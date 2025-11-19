@@ -487,7 +487,7 @@ if __name__ == "__main__":
     data = api.get_live_aqi_data(test_city)
     
     if data:
-        print(f"\n✅ Success!")
+        print(f"\n[SUCCESS] Data fetched!")
         print(f"City: {data['city']}")
         print(f"Actual AQI: {data['actual_aqi']:.2f}")
         print(f"PM2.5: {data['PM2.5']:.2f} μg/m³")
@@ -499,4 +499,4 @@ if __name__ == "__main__":
         category, code, color = get_aqi_category(data['actual_aqi'])
         print(f"\nAQI Category: {category} (Code: {code})")
     else:
-        print("\n❌ Failed to fetch data. Please check your API key.")
+        print("\n[ERROR] Failed to fetch data. Please check your API key.")

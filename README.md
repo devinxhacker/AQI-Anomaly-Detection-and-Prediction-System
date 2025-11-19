@@ -1,25 +1,25 @@
-# 🚨 Intelligent AQI Anomaly Detection & Environmental Alert System with Explainable AI
+# Intelligent AQI Anomaly Detection & Environmental Alert System with Explainable AI
 
-## 🎯 Project Overview
+## Project Overview
 
 A **revolutionary** AI/ML system that goes beyond traditional prediction to detect environmental anomalies, explain pollution patterns, and provide intelligent alerts using cutting-edge explainable AI techniques.
 
-### 🌟 What Makes This Project Unique?
+### What Makes This Project Unique?
 
 Unlike conventional AQI prediction systems, this project focuses on:
 
-1. **🔍 Anomaly Detection**: Identifying unusual pollution patterns that deviate from normal behavior
-2. **🧠 Explainable AI (XAI)**: Understanding WHY certain readings are anomalous using SHAP and LIME
-3. **📊 Multi-Algorithm Comparison**: Isolation Forest, Local Outlier Factor, and Deep Learning Autoencoders
-4. **⚠️ Intelligent Alert System**: Context-aware environmental alerts with severity classification
-5. **🔬 Pattern Analysis**: Temporal, spatial, and pollutant-specific anomaly patterns
-6. **📈 Real-time Dashboard**: Interactive visualization with drill-down capabilities
+1. **Anomaly Detection**: Identifying unusual pollution patterns that deviate from normal behavior
+2. **Explainable AI (XAI)**: Understanding WHY certain readings are anomalous using SHAP and LIME
+3. **Multi-Algorithm Comparison**: Isolation Forest, Local Outlier Factor, and Deep Learning Autoencoders
+4. **Intelligent Alert System**: Context-aware environmental alerts with severity classification
+5. **Pattern Analysis**: Temporal, spatial, and pollutant-specific anomaly patterns
+6. **Real-time Dashboard**: Interactive visualization with drill-down capabilities
 
 ---
 
-## 🎓 Addressing Project Requirements
+## Addressing Project Requirements
 
-### ✅ 1. Real-World Problem & Domain Challenge
+### 1. Real-World Problem & Domain Challenge
 
 **Problem Statement**: Traditional AQI monitoring systems fail to detect sudden environmental anomalies like industrial accidents, wildfire smoke intrusion, or sensor malfunctions. This system identifies unusual pollution patterns that could indicate:
 - Industrial accidents or leaks
@@ -28,14 +28,14 @@ Unlike conventional AQI prediction systems, this project focuses on:
 - Cross-border pollution transport
 - Localized pollution hotspots
 
-### ✅ 2. Dataset Exploration & Predictive Modeling
+### 2. Dataset Exploration & Predictive Modeling
 
 **Dataset**: 29,531 AQI measurements from 26 Indian cities (2015-2020)
 - **Anomaly Detection Models**: Isolation Forest, Local Outlier Factor (LOF), Autoencoder Neural Network
 - **Innovation**: Instead of predicting future AQI, we detect abnormal current patterns
 - **Explainability**: SHAP and LIME frameworks to explain each anomaly
 
-### ✅ 3. Rigorous Experimentation & Evaluation
+### 3. Rigorous Experimentation & Evaluation
 
 **Comprehensive Analysis**:
 - Compare 3 different anomaly detection algorithms
@@ -43,7 +43,7 @@ Unlike conventional AQI prediction systems, this project focuses on:
 - Validate against known pollution events
 - Cross-validate across different cities and time periods
 
-### ✅ 4. Evaluation Metrics & Comparative Analysis
+### 4. Evaluation Metrics & Comparative Analysis
 
 **Metrics Implemented**:
 - Anomaly Detection: Precision, Recall, F1-Score, Contamination Rate
@@ -51,7 +51,7 @@ Unlike conventional AQI prediction systems, this project focuses on:
 - Visualization: Anomaly scatter plots, temporal heatmaps, feature contribution charts
 - Comparative Analysis: Side-by-side algorithm performance
 
-### ✅ 5. Model Deployment, Testing & Validation
+### 5. Model Deployment, Testing & Validation
 
 **Deployment Features**:
 - Interactive Streamlit dashboard with real-time anomaly detection
@@ -60,7 +60,7 @@ Unlike conventional AQI prediction systems, this project focuses on:
 - Model persistence and retraining capabilities
 - Export functionality for reports and alerts
 
-### ✅ 6. Conclusion & Documentation
+### 6. Conclusion & Documentation
 
 **Comprehensive Documentation**:
 - Technical implementation details
@@ -71,31 +71,31 @@ Unlike conventional AQI prediction systems, this project focuses on:
 
 ---
 
-## 🏗️ Project Architecture
+## Project Architecture
 
 ```
 Project/
 │
-├── 📊 data/
+├── data/
 │   ├── dataset.csv                          # Raw AQI dataset (linked from parent)
 │   ├── processed_data.csv                   # Cleaned and preprocessed
 │   ├── anomalies_detected.csv               # Detected anomalies with scores
 │   └── validation_events.json               # Known pollution events for validation
 │
-├── 🤖 models/
+├── models/
 │   ├── isolation_forest_model.pkl           # Isolation Forest detector
 │   ├── lof_model.pkl                        # Local Outlier Factor detector
 │   ├── autoencoder_model.h5                 # Deep learning autoencoder
 │   ├── scaler.pkl                           # Feature scaler
 │   └── explainer_shap.pkl                   # SHAP explainer
 │
-├── 📓 notebooks/
+├── notebooks/
 │   ├── 01_data_exploration.ipynb            # EDA and visualization
 │   ├── 02_anomaly_detection_training.ipynb  # Model training
 │   ├── 03_explainable_ai_analysis.ipynb     # SHAP/LIME analysis
 │   └── 04_comparative_evaluation.ipynb      # Model comparison
 │
-├── 🐍 src/
+├── src/
 │   ├── data_preprocessing.py                # Data cleaning and feature engineering
 │   ├── anomaly_detectors.py                 # Isolation Forest, LOF, Autoencoder
 │   ├── explainable_ai.py                    # SHAP and LIME implementations
@@ -103,7 +103,7 @@ Project/
 │   ├── visualization.py                     # Advanced plotting functions
 │   └── utils.py                             # Helper functions
 │
-├── 🖥️ dashboard/
+├── dashboard/
 │   ├── streamlit_app.py                     # Main interactive dashboard
 │   ├── components/
 │   │   ├── anomaly_viewer.py                # Anomaly browser component
@@ -113,7 +113,7 @@ Project/
 │       ├── styles.css                       # Custom styling
 │       └── animations.js                    # Interactive elements
 │
-├── 📊 results/
+├── results/
 │   ├── model_comparison.png                 # Algorithm comparison chart
 │   ├── temporal_anomalies.png               # Time-series anomaly plot
 │   ├── spatial_anomalies.png                # Geographic distribution
@@ -121,12 +121,12 @@ Project/
 │   ├── performance_metrics.csv              # Detailed metrics
 │   └── anomaly_report.pdf                   # Executive summary
 │
-├── 🧪 tests/
+├── tests/
 │   ├── test_anomaly_detectors.py            # Unit tests
 │   ├── test_explainability.py               # XAI validation
 │   └── test_alert_system.py                 # Alert logic tests
 │
-├── 📚 docs/
+├── docs/
 │   ├── TECHNICAL_REPORT.md                  # Detailed technical documentation
 │   ├── MODEL_COMPARISON.md                  # Algorithm analysis
 │   ├── DEPLOYMENT_GUIDE.md                  # Deployment instructions
@@ -139,9 +139,9 @@ Project/
 
 ---
 
-## 🚀 Key Features
+## Key Features
 
-### 1. 🔍 Multi-Algorithm Anomaly Detection
+### 1. Multi-Algorithm Anomaly Detection
 
 **Isolation Forest**
 - Ensemble-based method ideal for high-dimensional data
@@ -158,7 +158,7 @@ Project/
 - Reconstruction error identifies anomalies
 - Captures complex non-linear relationships
 
-### 2. 🧠 Explainable AI (XAI)
+### 2. Explainable AI (XAI)
 
 **SHAP (SHapley Additive exPlanations)**
 - Game-theory based feature importance
@@ -170,13 +170,13 @@ Project/
 - Human-readable explanations
 - Cross-validation of SHAP insights
 
-### 3. ⚠️ Intelligent Alert System
+### 3. Intelligent Alert System
 
 **4-Level Severity Classification**:
-- 🟢 **Low**: Minor deviation, informational
-- 🟡 **Medium**: Notable anomaly, monitoring required
-- 🟠 **High**: Significant anomaly, investigation needed
-- 🔴 **Critical**: Extreme anomaly, immediate action required
+- **Low**: Minor deviation, informational
+- **Medium**: Notable anomaly, monitoring required
+- **High**: Significant anomaly, investigation needed
+- **Critical**: Extreme anomaly, immediate action required
 
 **Context-Aware Alerts**:
 - Time-of-day consideration (night vs. day)
@@ -184,7 +184,7 @@ Project/
 - City-specific baselines
 - Pollutant-specific thresholds
 
-### 4. 📊 Advanced Visualization
+### 4. Advanced Visualization
 
 - **Temporal Heatmaps**: Anomalies over time
 - **Spatial Distribution**: Geographic clustering
@@ -192,7 +192,7 @@ Project/
 - **Comparative Charts**: Algorithm performance
 - **Interactive Dashboard**: Drill-down capabilities
 
-### 5. 🔬 Pattern Analysis
+### 5. Pattern Analysis
 
 **Discovered Insights**:
 - Temporal patterns (weekday vs. weekend anomalies)
@@ -202,7 +202,7 @@ Project/
 
 ---
 
-## 🛠️ Technologies Used
+## Technologies Used
 
 ### Core ML/AI Stack
 - **Python 3.8+**: Primary language
@@ -229,7 +229,7 @@ Project/
 
 ---
 
-## 📦 Installation
+## Installation
 
 ### Prerequisites
 - Python 3.8 or higher
@@ -271,7 +271,7 @@ streamlit run dashboard/streamlit_app.py
 
 ---
 
-## 🎯 Usage
+## Usage
 
 ### 1. Data Exploration
 
@@ -326,7 +326,7 @@ streamlit run dashboard/streamlit_app.py
 
 ---
 
-## 📊 Evaluation Metrics
+## Evaluation Metrics
 
 ### Anomaly Detection Metrics
 
@@ -347,7 +347,7 @@ streamlit run dashboard/streamlit_app.py
 
 ---
 
-## 🔬 Methodology
+## Methodology
 
 ### Phase 1: Data Preprocessing
 1. Load raw AQI dataset (29,531 records)
@@ -381,7 +381,7 @@ streamlit run dashboard/streamlit_app.py
 
 ---
 
-## 📈 Expected Results
+## Expected Results
 
 ### Anomaly Detection Performance
 - **Isolation Forest**: Precision ~0.82, Recall ~0.78, F1 ~0.80
@@ -401,7 +401,7 @@ streamlit run dashboard/streamlit_app.py
 
 ---
 
-## 🎨 Dashboard Screenshots
+## Dashboard Screenshots
 
 ### Main Dashboard
 - Real-time anomaly count
@@ -423,7 +423,7 @@ streamlit run dashboard/streamlit_app.py
 
 ---
 
-## 🚀 Future Enhancements
+## Future Enhancements
 
 ### Phase 2 Features
 - [ ] Real-time streaming anomaly detection
@@ -447,7 +447,7 @@ streamlit run dashboard/streamlit_app.py
 
 ---
 
-## 📚 Documentation
+## Documentation
 
 - **[TECHNICAL_REPORT.md](docs/TECHNICAL_REPORT.md)**: Detailed methodology and results
 - **[MODEL_COMPARISON.md](docs/MODEL_COMPARISON.md)**: Algorithm analysis
@@ -456,7 +456,7 @@ streamlit run dashboard/streamlit_app.py
 
 ---
 
-## 🧪 Testing
+## Testing
 
 ```bash
 # Run all tests
@@ -471,26 +471,26 @@ pytest --cov=src tests/
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 This is an academic project developed for TY Sem 5 AIML coursework. Contributions and suggestions are welcome!
 
 ---
 
-## 📄 License
+## License
 
 Educational use only. Developed as part of AIML Mini Project.
 
 ---
 
-## 👥 Author
+## Author
 
 **TY Sem 5 AIML Student**  
 Air Quality Index Anomaly Detection & Explainable AI Project
 
 ---
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - Central Pollution Control Board (CPCB) for AQI data
 - scikit-learn and TensorFlow communities
@@ -501,8 +501,8 @@ Air Quality Index Anomaly Detection & Explainable AI Project
 
 <div align="center">
 
-### 🌟 Making Environmental Monitoring Intelligent and Explainable
+### Making Environmental Monitoring Intelligent and Explainable
 
-**Built with ❤️ using Python, Machine Learning, and Explainable AI**
+**Built using Python, Machine Learning, and Explainable AI**
 
 </div>

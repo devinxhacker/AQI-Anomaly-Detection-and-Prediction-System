@@ -473,4 +473,4 @@ if __name__ == "__main__":
     config = ConfigManager.get_default_config()
     print(json.dumps(config, indent=2))
     
-    print("\n✅ Utility functions working correctly!")
+    print("\n[PASS] Utility functions working correctly!")
