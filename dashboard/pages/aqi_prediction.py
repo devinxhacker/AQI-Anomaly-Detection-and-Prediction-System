@@ -211,7 +211,7 @@ def render_aqi_prediction_page():
                 "Yesterday's AQI (estimate):",
                 min_value=0.0,
                 max_value=500.0,
-                value=live_data['actual_aqi'],
+                value=float(live_data['actual_aqi']),
                 help="Estimated AQI from previous day"
             )
         
@@ -220,7 +220,7 @@ def render_aqi_prediction_page():
                 "Yesterday's PM2.5 (estimate):",
                 min_value=0.0,
                 max_value=500.0,
-                value=live_data['PM2.5'],
+                value=float(live_data['PM2.5']),
                 help="Estimated PM2.5 from previous day"
             )
         
