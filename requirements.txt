@@ -1,39 +1,35 @@
 # Core Data Science Libraries
-pandas>=1.5.0
-numpy>=1.23.0
-scipy>=1.10.0
+pandas
+numpy
+scipy
 
 # Machine Learning
-scikit-learn>=1.2.0
-joblib>=1.2.0
-
+scikit-learn
+joblib
 # Deep Learning (for Autoencoder)
-tensorflow>=2.12.0
-keras>=2.12.0
+tensorflow
+keras
 
 # Explainable AI
-shap>=0.41.0
-lime>=0.2.0
-
+shap
+lime
 # Visualization
-matplotlib>=3.6.0
-seaborn>=0.12.0
-plotly>=5.13.0
-
+matplotlib
+seaborn
+plotly
 # Dashboard
-streamlit>=1.25.0
+streamlit
 
 # API Integration
-requests>=2.28.0
+requests
 
 # Utilities
-python-dotenv>=1.0.0
-tqdm>=4.65.0
-
+python-dotenv
+tqdm
 # Testing
-pytest>=7.3.0
-pytest-cov>=4.1.0
+pytest
+pytest-cov
 
 # Report Generation
-reportlab>=4.0.0
-fpdf2>=2.7.0
+reportlab
+fpdf2
