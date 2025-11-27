@@ -84,3 +84,4 @@ logs/
 *.gsheet
 
 *.env
+*.sh
